@@ -101,7 +101,7 @@ def createland(request,nid):
 def showland(request,nid):
     owner = Owner.objects.filter(serial=nid)
     
-
+    # changes made
     
     contex={
         'nid': nid,
@@ -117,6 +117,7 @@ def delete(request,nid):
         instance= get_object_or_404(Owner,id=nid)
         instance.delete()
         return render(request,'main.html')
+        # change made
     else:
         return render(request,'login.html')
 
