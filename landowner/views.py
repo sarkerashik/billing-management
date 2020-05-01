@@ -80,49 +80,73 @@ def logout(request):
 
 def createland(request,nid):
 
-    if request.method == "POST":
+    if request.user.is_authenticated:
+        if request.method == "POST":
 
-        name = request.POST['name']
-        email = request.POST['email']
-        contact = request.POST['contact']
-        address = request.POST['address']
-        user_id = nid
-        user = Owner(name=name,email=email,contact=contact,address=address,user_id=user_id)
-        user.save()
+            name = request.POST['name']
+            email = request.POST['email']
+            contact = request.POST['contact']
+            address = request.POST['address']
+            user_id = nid
+            user = Owner(name=name,email=email,contact=contact,address=address,user_id=user_id)
+            user.save()
+            owner = Owner.objects.filter(user_id=nid)
+            contex ={
+                'nid': nid,
+                'owner': owner,
+            }
+
+            return redirect("showland",nid)
+
+    
+        else:
+            return render(request,'createland.html')
+
+    else:
         return render(request,'main.html')
 
+
     
+
+
+def showland(request,usid):
+    if request.user.is_authenticated:
+        owner = Owner.objects.filter(user_id=usid)
+    
+        contex={
+            
+            'owner': owner,
+        }
+        return render(request,'showland.html',contex)
+
     else:
-        return render(request,'createland.html')
-
+        return render(request,'main.html')
     
 
 
-def showland(request,nid):
-    owner = Owner.objects.filter(user_id=nid)
-    
-    # changes made
-    
-    contex={
-        'nid': nid,
-        'owner': owner,
-        
-    }
-    return render(request,'showland.html',contex)
 
-
-
-def delete(request,nid):
+def delete(request,nid,usid):
     if request.user.is_authenticated:
         instance= get_object_or_404(Owner,id=nid)
         instance.delete()
-        return render(request,'main.html')
-        # change made
+
+        '''owner = Owner.objects.filter(user_id=usid)
+        print(owner)
+        contex = {
+            'nid': nid,
+            'owner': owner,
+        }
+        return render(request,'reshow.html',contex)'''
+
+        return redirect("showland",usid)
+
     else:
         return render(request,'login.html')
 
 
-def edit(request,nid):
+
+
+def edit(request,nid,usid): 
     if request.user.is_authenticated:
 
         instance= get_object_or_404(Owner,id=nid)
@@ -131,7 +155,7 @@ def edit(request,nid):
         if form .is_valid():
             instance= form.save(commit=False)
             instance.save()
-            return render(request,'main.html')
+            return redirect('showland',usid)
     
         contex={
         'form':form,

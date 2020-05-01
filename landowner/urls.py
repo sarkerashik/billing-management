@@ -8,7 +8,7 @@ urlpatterns=[
     path('login',views.login,name='login'),
     path('logout',views.logout,name='logout'),
     path('createland<nid>',views.createland,name='createland'),
-    path('showland<nid>',views.showland,name='showland'),
-    path('edit<nid>',views.edit,name='edit'),
-    path('delete<nid>',views.delete,name='delete'),
+    path('showland<usid>',views.showland,name='showland'),
+    path('edit<nid><usid>',views.edit,name='edit'),
+    path('delete<nid><usid>',views.delete,name='delete'),
 ]
