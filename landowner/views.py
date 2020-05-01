@@ -86,8 +86,8 @@ def createland(request,nid):
         email = request.POST['email']
         contact = request.POST['contact']
         address = request.POST['address']
-        serial = nid
-        user = Owner(name=name,email=email,contact=contact,address=address,serial=serial)
+        user_id = nid
+        user = Owner(name=name,email=email,contact=contact,address=address,user_id=user_id)
         user.save()
         return render(request,'main.html')
 
@@ -99,7 +99,7 @@ def createland(request,nid):
 
 
 def showland(request,nid):
-    owner = Owner.objects.filter(serial=nid)
+    owner = Owner.objects.filter(user_id=nid)
     
     # changes made
     
@@ -124,8 +124,10 @@ def delete(request,nid):
 
 def edit(request,nid):
     if request.user.is_authenticated:
+
         instance= get_object_or_404(Owner,id=nid)
         form= OwnerForm(request.POST or None, instance=instance)
+        
         if form .is_valid():
             instance= form.save(commit=False)
             instance.save()

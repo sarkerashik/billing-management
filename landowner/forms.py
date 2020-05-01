@@ -4,4 +4,4 @@ from .models import Owner
 class OwnerForm(forms.ModelForm):
     class Meta:
         model = Owner
-        fields = '__all__'
+        fields = ['name','email','contact','address']

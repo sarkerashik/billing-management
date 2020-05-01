@@ -1,29 +1,71 @@
+{% extends 'main.html'%}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{%block content %}
+
+ <table border="2px" width="100%">
      
-    {%for x in owner%}
-    
-   
-   
-   
-    <table>
+    <caption style="padding-top:15px; padding-bottom:10px">
+        <strong style="float:left">Landowner List</strong>
+        <strong style="float:right">
+            <button style="background-color:teal; ">
+                <a style="text-decoration:none; color:whitesmoke" href="createland{{user.id}}">Create Landowner</a>
+            </button>
+        </strong>
+    </caption>
+      
+    <tr>
+         <th>Sl#</th>
+         <th>Name</th>
+         <th>Email</th>
+         <th>Contact</th>
+         <th>Address</th>
+         <th>Created At</th>
+         <th>Last Update</th>
+         <th>Action</th>
+    </tr>
+
+     {% with i=1 %}
+
+
+     {%for x in owner%}
+     <tr align="center">
         <td>
-            <b>{{x.name}}</b> &nbsp; &nbsp; 
-            <b>{{x.email}}</b> &nbsp; &nbsp;
-            <b>{{x.contact}}</b> &nbsp; &nbsp;
-            <b>{{x.address}}</b> &nbsp; &nbsp; <a href="edit{{x.id}}">edit</a>&nbsp; &nbsp; <a href="delete{{x.id}}">delete</a><br>
-            
+            {{forloop.counter}}
         </td>
-    </table>
+        <td>
+            {{x.name}}
+        </td>
+        <td>
+            {{x.email}}
+        </td>
+        <td>
+            {{x.contact}} 
+        </td>
+        <td>
+            {{x.address}}
+        </td>
+        <td>
+            {{x.create}}
+        </td>
+        <td>
+            {{x.update}}
+        </td>
+        <td>
+            <button style="background-color:teal;">
+                <a style="text-decoration:none; color:whitesmoke" href="edit{{x.id}}">Edit</a>
+            </button>
+            <button style="background-color:red;">
+                <a style="text-decoration:none; color:whitesmoke" href="delete{{x.id}}">delete</a>
+            </button>
+        </td>
+
+     </tr>
+     {%endfor%}
+
     
-   
-    {%endfor%}
-</body>
-</html>
+</table>
+
+{% endwith %}
+
+{%endblock%}
+

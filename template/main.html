@@ -4,14 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .topnav {
+            overflow: hidden;
+            background-color:#333;
+        }
+        .topnav a {
+            padding: 14px 16px;
+            float: left;
+            color: whitesmoke;
+            text-decoration: none;
+            font-size: 17px;
+
+        }
+        .topnav a:hover{
+            color: black;
+            background-color:#ddd;
+        }
+        .topnav .name{
+            float: right;
+        }
+    </style>
 </head>
 <body>
+    <section class="topnav">
+        <a href="/">Home</a>
+        <a href="showland{{user.id}}">Landowner</a>
+        <a  class="name" href="logout">Logout</a>
+        <a class="name" href="#">{{user.username}}</a>
+    </section>
     
-    <hr><h1 align='center' boder='1px' width='600px'>Landowner</h1><hr><br><br>
-    <h3 align='right'> hi {{user.username}} &nbsp; &nbsp; <a href="logout">logout</a></h4>
-    <a href="createland{{user.id}}">Create Landowner</a><br><br>
-    <a href="showland{{user.id}}">Show Landowner list</a>
+    <section>
+        {%block content%}
+        {%endblock%}
+    </section>
     
-
 </body>
 </html>
