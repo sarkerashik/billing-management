@@ -2,13 +2,26 @@
 
 {%block content%}
 
-<form action="" method="POST">
-    {%csrf_token%}
-    
-    {{form.as_p}}
-    
-    <input type="submit">
+    <div class="landowner_create_form">
+        <strong>Update Landowner</strong><hr>
+        <form action="" method="POST">
 
-</form>
+            {%csrf_token%}
+            <label for="name"> Name</label>
+            {{form.name}}
+      
+            <label for="email">Email</label>
+            {{form.email}}
+    
+            <label for="contact">Contact</label>
+            {{form.contact}}
+    
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address" placeholder="Address" value="{{instance.address}}">
+        
+            <input type="submit" value="Submit">
+            
+        </form>
+    </div>
 
 {%endblock%}

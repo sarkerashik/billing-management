@@ -1,18 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
 </head>
 <body>
-    <form action="login" method="POST">
+    <form action="login" method="POST" class="box">
 
         {%csrf_token%}
+        <h1>Login</h1>
 
-        <input type="text" name="username" placeholder="enter username"><br>
-        <input type="password" name="password" placeholder="enter password"><br><br>
-        <input type="submit" value="click here">
+        <input type="text" name="username" placeholder="Enter username"><br>
+        <input type="password" name="password" placeholder="Enter password"><br>
+        <input type="submit" value="Login">
+        <h5 style="color: white;"> don’t have any account? &nbsp; <a style="color:aqua; text-decoration: none" href="register">Sing up</a> </h5>
 
     </form>
     <div>

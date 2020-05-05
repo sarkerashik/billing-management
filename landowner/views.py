@@ -8,9 +8,9 @@ from .forms import OwnerForm
 
 def mainhome(request):
     if request.user.is_authenticated:
-        return render(request,'main.html')
+        return render(request,'main.html',{'title':'Home'})
     else:
-        return render(request,'home.html')
+        return redirect("login")
 
 
 def register(request):
@@ -60,77 +60,77 @@ def login(request):
 
         if user is not None:
             auth.login(request,user)
-            return render(request,'main.html')
+            return redirect("/")
 
         else:
             messages.info(request,'user name or password wrong')
-            return render(request,'login.html')
+            return redirect("login")
         
 
     else:
-        return render(request,'login.html')
+        return render(request,"login.html")
         
 
 
 def logout(request):
     auth.logout(request)
-    return render(request,'home.html')
+    return redirect("login")
 
 
 
-def createland(request,nid):
+def createLandowner(request):
 
     if request.user.is_authenticated:
+        
         if request.method == "POST":
 
             name = request.POST['name']
             email = request.POST['email']
             contact = request.POST['contact']
             address = request.POST['address']
-            user_id = nid
+            user_id = request.user.id
             user = Owner(name=name,email=email,contact=contact,address=address,user_id=user_id)
             user.save()
-            owner = Owner.objects.filter(user_id=nid)
+            owner = Owner.objects.filter(user_id=request.user.id)
             contex ={
-                'nid': nid,
                 'owner': owner,
             }
 
-            return redirect("showland",nid)
+            return redirect("landowner")
 
     
         else:
-            return render(request,'createland.html')
+            return render(request,'createland.html',{'title':'Create Landowner'})
 
     else:
-        return render(request,'main.html')
+        return redirect("login")
 
 
     
 
 
-def showland(request,usid):
+def landowner(request):
     if request.user.is_authenticated:
-        owner = Owner.objects.filter(user_id=usid)
+        owner = Owner.objects.filter(user_id=request.user.id)
     
         contex={
-            
             'owner': owner,
+            'title':'Landowner List',
         }
         return render(request,'showland.html',contex)
 
     else:
-        return render(request,'main.html')
+        return redirect("login")
     
 
 
 
-def delete(request,nid,usid):
+def deleteLandowner(request,nid):
     if request.user.is_authenticated:
         instance= get_object_or_404(Owner,id=nid)
         instance.delete()
 
-        '''owner = Owner.objects.filter(user_id=usid)
+        '''owner = Owner.objects.filter(user_id=request.user.id)
         print(owner)
         contex = {
             'nid': nid,
@@ -138,15 +138,15 @@ def delete(request,nid,usid):
         }
         return render(request,'reshow.html',contex)'''
 
-        return redirect("showland",usid)
+        return redirect("landowner")
 
     else:
-        return render(request,'login.html')
+        return redirect("login")
 
 
 
 
-def edit(request,nid,usid): 
+def editLandowner(request,nid): 
     if request.user.is_authenticated:
 
         instance= get_object_or_404(Owner,id=nid)
@@ -155,12 +155,13 @@ def edit(request,nid,usid):
         if form .is_valid():
             instance= form.save(commit=False)
             instance.save()
-            return redirect('showland',usid)
+            return redirect("landowner")
     
         contex={
         'form':form,
         'instance':instance,
+        'title':'Edit Landowner',
         }
         return render(request,'update.html',contex)
     else:
-        return render(request,'login.html')
+        return redirect("login")

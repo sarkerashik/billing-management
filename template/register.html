@@ -1,23 +1,90 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sing Up</title>
+    <link rel="stylesheet" href="{% static 'register.css' %}">
 </head>
 <body>
-    <form action="" method="POST">
+    <form action="" method="POST" class="register">
 
         {%csrf_token%}
-        <input type="text" name="first_name" placeholder="enter first_name"><br>
-        <input type="text" name="last_name" placeholder="enter last_name"><br>
-        <input type="text" name="username" placeholder="enter username"><br>
-        <input type="email" name="email" placeholder="enter email"><br>
-        <input type="password" name="password1" placeholder="enter password"><br>
-        <input type="password" name="password2" placeholder="confirm password"><br><br>
-        <input type="submit" value="click here">
+        <h1>Sing Up</h1>
+
+        <table>
+
+            <tr>
+                <td>
+                    First Name : 
+                </td>
+                <td>
+                    <input type="text" name="first_name" placeholder="enter first name"><br>
+                </td>
+                
+            </tr>
+
+            <tr>
+                <td>
+                    Last Name : 
+                </td>
+                <td>
+                    <input type="text" name="last_name" placeholder="enter last name"><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    User Name : 
+                </td>
+                <td>
+                    <input type="text" name="username" placeholder="enter username"><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Email : 
+                </td>
+                <td>
+                    <input type="email" name="email" placeholder="enter email"><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Password : 
+                </td>
+                <td>
+                    <input type="password" name="password1" placeholder="enter password"><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="text">
+                    Confirm Password : 
+                </td>
+                <td>
+                    <input type="password" name="password2" placeholder="confirm password"><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+                    <input type="submit" value="Submit">
+                </td>
+            </tr>
+
+        </table> 
+        <h5 style="color:white;"> already registered? &nbsp; <a style="color:aqua; text-decoration: none" href="login">Sing in</a> </h5>
 
     </form>
+
+
     <div>
         {% for message in messages %}
         <h1>{{message}}</h1>

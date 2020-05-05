@@ -2,13 +2,14 @@
 
 {%block content %}
 
+<div class="landowner_create_form">
  <table border="2px" width="100%">
      
-    <caption style="padding-top:15px; padding-bottom:10px">
+    <caption style="padding-top:5px; padding-bottom:10px">
         <strong style="float:left">Landowner List</strong>
         <strong style="float:right">
             <button style="background-color:teal; ">
-                <a style="text-decoration:none; color:whitesmoke" href="createland{{user.id}}">Create Landowner</a>
+                <a style="text-decoration:none; color:whitesmoke" href="landowner/create">Create Landowner</a>
             </button>
         </strong>
     </caption>
@@ -52,18 +53,17 @@
         </td>
         <td>
             <button style="background-color:teal;">
-                <a style="text-decoration:none; color:whitesmoke" href="edit{{x.id}}{{user.id}}">Edit</a>
+                <a style="text-decoration:none; color:whitesmoke" href="landowner/edit/{{x.id}}">Edit</a>
             </button>
             <button style="background-color:red;">
-                <a style="text-decoration:none; color:whitesmoke" href="delete{{x.id}}{{user.id}}">delete</a>
+                <a style="text-decoration:none; color:whitesmoke" href="landowner/delete/{{x.id}}">delete</a>
             </button>
         </td>
 
      </tr>
      {%endfor%}
-
-    
 </table>
+</div>
 
 {% endwith %}
 
