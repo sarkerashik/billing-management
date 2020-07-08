@@ -2,34 +2,30 @@
 
 {%block content %}
 
-<div class="landowner_create_form">
- <table border="2px" width="100%">
-     
-    <caption style="padding-top:5px; padding-bottom:10px">
-        <strong style="float:left">Landowner List</strong>
-        <strong style="float:right">
-            <button style="background-color:teal; ">
-                <a style="text-decoration:none; color:whitesmoke" href="landowner/create">Create Landowner</a>
-            </button>
-        </strong>
-    </caption>
-      
-    <tr>
-         <th>Sl#</th>
-         <th>Name</th>
-         <th>Email</th>
-         <th>Contact</th>
-         <th>Address</th>
-         <th>Created At</th>
-         <th>Last Update</th>
-         <th>Action</th>
-    </tr>
 
-     {% with i=1 %}
+<div id="customers">
+    <table width="100%">
+        <caption style="margin-bottom: 6px;">
+            <strong style="float:left";>Landowner List</strong>
+            <strong style="float:right">
+                <button style="background-color:teal; padding:5px">
+                    <a style="text-decoration:none; color:whitesmoke" href="{% url 'createlandowner' %}">Create Landowner</a>
+                </button>
+            </strong>
+        </caption>
+        <tr>
+            <th>Sl#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Created At</th>
+            <th>Last Update</th>
+            <th>Action</th>
+        </tr>
 
-
-     {%for x in owner%}
-     <tr align="center">
+        {%for x in owner%}
+     <tr>
         <td>
             {{forloop.counter}}
         </td>
@@ -62,10 +58,9 @@
 
      </tr>
      {%endfor%}
-</table>
+        
+      </table>
 </div>
-
-{% endwith %}
 
 {%endblock%}
 

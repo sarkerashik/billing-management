@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     <style>
+        body{
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        }
+        .body_section{
+            margin-top:65px;
+        }
         .topnav {
             overflow: hidden;
             background-color:#333;
+            position: fixed !important;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
         }
         .topnav a {
             padding: 14px 16px;
@@ -25,7 +37,7 @@
             float: right;
         }
 
-        .landowner_create_form input[type=text], .landowner_create_form input[type=email]  {
+        .landowner_create_form input[type=text], .landowner_create_form input[type=email], .landowner_create_form select, .landowner_create_form input[type=date], .landowner_create_form input[type=number], .landowner_create_form input[type=date], .landowner_create_form input[type=file]{
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -59,18 +71,52 @@
             border: 1px solid rgb(209, 206, 206);
         }
         
+
+        #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 5px 20px 20px 20px;
+        }
+          
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+          
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+          
+        #customers tr:hover {background-color: #ddd;}
+          
+        #customers th {
+            padding-top: 9px;
+            padding-bottom: 9px;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+        }
+        .landowner{
+            width: 100%;
+            padding: 2px 20px 20px 20px;
+            text-align: center;
+        }
         
     </style>
 </head>
 <body>
     <section class="topnav">
-        <a href="/">Home</a>
+        <a href="{%  url 'mainhome' %}">Dashboard</a>
         <a href="{%  url 'landowner' %}">Landowner</a>
+        <a href="{%  url 'bill_categories' %}">Bill Categories</a>
+        <a href="{%  url 'bills' %}">Bills</a>
         <a  class="name" href="{%  url 'logout' %}">Logout</a>
         <a class="name" href="#">{{user.username}}</a>
-    </section><br><br>
+    </section>
     
-    <section>
+    <section class="body_section">
         {%block content%}
         {%endblock%}
     </section>

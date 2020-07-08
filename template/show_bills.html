@@ -1,0 +1,88 @@
+{% extends 'main.html'%}
+{% load datetime %}
+
+{%block content %}
+
+
+<div id="customers">
+
+    <table width="100%">
+        <caption style="margin-bottom: 6px;">
+            <strong style="float:left";>Bill List</strong>
+            <strong style="float:right">
+                <button style="background-color:teal; padding:5px">
+                    <a style="text-decoration:none; color:whitesmoke" href="{% url 'createbills' %}">Create Bills</a>
+                </button>
+            </strong>
+        </caption>
+        <tr>
+            <th>Sl#</th>
+            <th>Landowner</th>
+            <th>Bill Category</th>
+            <th>Bill Category Name</th>
+            <th>Bill Amount</th>
+            <th>From Date</th>
+            <th>TO Date</th>
+            <th>Payment Date</th>
+            <th>Receipt Image</th>
+            <th>Note</th>
+            <th>Action</th>
+        </tr>
+
+        {%for x in bills%}
+        <tr>
+            <td>
+                {{forloop.counter}}
+            </td>
+            <td> 
+                {% for y in owner %}
+                    {% if y.id == x.landowner_id%}
+                    {{y.name}}
+                    {% endif %}
+                {%endfor%}    
+            </td>
+            <td>
+                {% for z in bill_categories %}
+                    {% if z.id == x.bill_category_id %}
+                    {{z.name}}
+                    {%endif%}
+                {%endfor%} 
+            </td>
+            <td>
+                {{x.bill_category_name}}
+            </td>
+            <td>
+                {{x.bill_amount}}
+            </td>
+            <td>
+                {{x.form_date|datetimeformat}}
+            </td>
+            <td>
+                {{x.to_date|datetimeformat}}
+            </td>
+            <td>
+                {{x.payment_date|datetimeformat}}
+            </td>
+            <td>
+                <img src="{{x.receipt_image.url}}" alt="Icon" style="height:35px; width:35px; object-fit:contain;">
+            </td>
+            <td>
+                {{x.note}}
+            </td>
+            <td>
+                <button style="background-color:teal;">
+                    <a style="text-decoration:none; color:whitesmoke" href="bills/edit/{{x.id}}">Edit</a>
+                </button>
+                <button style="background-color:red;">
+                    <a style="text-decoration:none; color:whitesmoke" href="bills/delete/{{x.id}}">delete</a>
+                </button>
+            </td>
+
+        </tr>
+        {%endfor%}
+        
+    </table>
+</div>
+
+{%endblock%}
+

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Owner
+from .models import Bill_Categories
 
 # Register your models here.
 class OwnerAdmin(admin.ModelAdmin):
@@ -9,4 +10,5 @@ class OwnerAdmin(admin.ModelAdmin):
     list_editable=['contact']
     list_filter =["create","update"]
 
-admin.site.register(Owner,OwnerAdmin)
+admin.site.register(Owner,OwnerAdmin),
+admin.site.register(Bill_Categories)

@@ -1,0 +1,70 @@
+{% extends 'main.html'%}
+{% load datetime %}
+
+{%block content%}
+
+    <div class="landowner_create_form">
+        <strong>Update Bills</strong><hr>
+        <form action="" method="POST" enctype="multipart/form-data">
+
+            {%csrf_token%}
+
+            <label for="landowner"> Landowner </label>
+
+            <select name="landowner_id" id="landowner_id">
+
+                {% for x in owner %}
+                    {% if x.id == instance.landowner_id %}
+                        <option value="{{x.id}}" selected>{{x.name}}</option>
+                    {% else %}
+                        <option value="{{x.id}}">{{x.name}}</option>
+                    {% endif %}
+
+                {%endfor%}
+
+            </select>
+            
+
+            <label for="bill_category_id"> Bill Category </label>
+
+            <select name="bill_category_id" id="bill_category_id">
+
+                {% for x in bills %}
+                    {% if x.id == instance.bill_category_id %}
+                        <option value="{{x.id}}" selected>{{x.name}}</option>
+                    {% else %}
+                        <option value="{{x.id}}">{{x.name}}</option>
+                    {% endif %}
+                {%endfor%}
+
+            </select>
+            
+            <label for="bill_category_name"> Bill Category Name </label>
+            <input type="text" name="bill_category_name" value="{{instance.bill_category_name}}">
+
+            <label for="bill_amount"> Bill Amount </label>
+            <input type="number" name="bill_amount" value="{{instance.bill_amount}}">
+
+            <label for="form_date">From Date </label>
+            <input type="date" name="form_date" value="{{instance.form_date|datetimeformat:'%Y-%m-%d'}}">
+
+            <label for="to_date">To Date </label>
+            <input type="date" name="to_date" value="{{instance.to_date|datetimeformat:'%Y-%m-%d'}}">
+
+            <label for="payment_date">Payment Date </label>
+            <input type="date" name="payment_date" value="{{instance.payment_date|datetimeformat:'%Y-%m-%d'}}">
+
+            <label for="receipt_image">Receipt Image</label>
+            <input type="file" id="" name="receipt_image" value="{{instance.receipt_image}}">
+
+            <label for="note">Note </label>
+            <input type="text" name="note" value="{{instance.note}}">
+
+            
+             
+            <input type="submit" value="Submit">
+
+
+        </form>
+    </div>
+{%endblock%}

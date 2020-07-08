@@ -1,0 +1,62 @@
+{% extends 'main.html'%}
+
+{%block content %}
+
+
+<div id="customers">
+    <table width="100%">
+        <caption style="margin-bottom: 6px;">
+            <strong style="float:left";>Bill Category List</strong>
+            <strong style="float:right">
+                <button style="background-color:teal; padding:5px">
+                    <a style="text-decoration:none; color:whitesmoke" href="{% url 'createbill_categories' %}">Create Bill Category</a>
+                </button>
+            </strong>
+        </caption>
+        <tr>
+            <th>Sl#</th>
+            <th>Icon</th>
+            <th>Name</th>
+            <th>color</th>
+            <th>Created At</th>
+            <th>Last Update</th>
+            <th>Action</th>
+        </tr>
+
+        {%for x in bill_categories%}
+     <tr>
+        <td>
+            {{forloop.counter}}
+        </td>
+        <td>
+            <img src="{{x.icon.url}}" alt="Icon" style="height:35px; width:35px; object-fit:contain;">
+        </td>
+        <td>
+            {{x.name}}
+        </td>
+        <td>
+            {{x.color}}
+        </td>
+        <td>
+            {{x.create}}
+        </td>
+        <td>
+            {{x.update}}
+        </td>
+        <td>
+            <button style="background-color:teal;">
+                <a style="text-decoration:none; color:whitesmoke" href="bill-categories/edit/{{x.id}}">Edit</a>
+            </button>
+            <button style="background-color:red;">
+                <a style="text-decoration:none; color:whitesmoke" href="bill-categories/delete/{{x.id}}">delete</a>
+            </button>
+        </td>
+
+     </tr>
+     {%endfor%}
+        
+      </table>
+</div>
+
+{%endblock%}
+

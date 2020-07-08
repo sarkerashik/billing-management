@@ -1,0 +1,50 @@
+{% extends 'main.html'%}
+{%block content%}
+    
+    <div class="landowner_create_form">
+        <strong>Create Bills</strong><hr>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+
+
+            <label for="landowner"> Landowner </label>
+            <select id="landowner" name="landowner_id">
+                {% for x in owner%}
+                <option value="{{x.id}}">{{x.name}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="bill_category"> Bill Category </label>
+            <select id="bill_category" name="bill_category_id">
+                {% for x in bill_category%}
+                <option value="{{x.id}}">{{x.name}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="bill_category_name">Bill Category Name</label>
+            <input type="text" id="bill_category_name" name="bill_category_name" placeholder="bill category name">
+
+            <label for="bill_amount">Bill Amount</label>
+            <input type="text" id="bill_amount" name="bill_amount" placeholder="bill amount">
+
+            <label for="form_date">Form Date</label>
+            <input type="date" id="form_date" name="form_date">
+
+            <label for="to_date">To Date</label>
+            <input type="date" id="to_date" name="to_date">
+
+            <label for="payment_date">Payment Date</label>
+            <input type="date" id="payment_date" name="payment_date">
+
+            <label for="receipt_image">Receipt Image</label>
+            <input type="file" id="receipt_image" name="receipt_image">
+
+            <label for="note">Note</label>
+            <input type="text" id="note" name="note" placeholder="note">
+
+            <input type="submit" value="Submit">
+
+        </form>
+    </div> 
+
+{%endblock%}
